@@ -1,0 +1,12 @@
+# starts php-apache server
+version: "3.7"
+services:
+  php_server:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./server/src:/var/www/html
+      - ./server/php.ini:/usr/local/etc/php/php.ini
+      - ./server/uploads:/var/www/uploads
+    restart: unless-stopped
