@@ -1,5 +1,5 @@
 # php_file_upload
-Aufgrund der wechselnden Aufgabe bin ich noch nicht weiter gekommen, als nächstes hätte ich die ausgewählten files mit js extrahiert und dynamisch entsprechende UI zum kommentieren hinzugefügt und hätte den POST request über die fetch api geschickt um progress und eventuelle fehler neben den entsprechenden Dateien anzuzeigen. Ich habe noch nie etwas in php programmiert, deshalb bitte ich offensichtliche Fehler zu entschuldigen.
+Aufgrund der wechselnden Aufgabe bin ich noch nicht weiter gekommen, aktuell werden nur die Dateien auf dem Server in einem Ordner gespeichert. Hier wäre es sicherlich sinnvoll die Metadaten in einer strukturierten Datenbank separat von den Dateien zu speichern um einen schnellen Zugriff auf diese zu ermöglichen. Bei großen Datenmengen könnte auch einee Blob storage, wie AWS S3 zum lagern der Dateien verwendet werden. Die Kommentare werden den passenden Dateien zugeordnet und in der JSON response zurückgegeben. Ich bin noch nicht dazu gekommen die einzelnen Files gemäß der JSON response nach erfolgreich und nicht erfolgreich zu sortieren und auch für upload progress hatte ich keine Zeit. 
 
 ## Start instruktionen:
 ### Docker:

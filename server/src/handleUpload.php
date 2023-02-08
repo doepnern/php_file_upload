@@ -1,6 +1,15 @@
 <?php
 $uploaddir = '/var/www/uploads/';
 $allowedFileTypes = array("image/bmp","image/jpeg","image/jpg", "image/png","image/svg+xml","image/webp","application/pdf");
+$typeExtensionMapping = [
+    "image/bmp" => "bmp",
+    "image/jpeg" => "jpg",
+    "image/jpg" => "jpg",
+    "image/png" => "png",
+    "image/svg+xml" => "svg",
+    "image/webp" => "webp",
+    "application/pdf" => "pdf",
+];
 //max file size in bytes: 5mb
 $allowedMaxFileSize = 5000000;
 
@@ -26,8 +35,14 @@ for($i = 0; $i < $numFiles; $i++){
         "tmp_name" => $_FILES["userfile"]["tmp_name"][$i],
         "error" => $_FILES["userfile"]["error"][$i],
         "size" => $size,
-        "type" => $type
+        "type" => $type,
     ];
+    //comments extrahieren
+    if(isset($_POST["comment_".$formattedFiles[$i]["name"]])){
+        $formattedFiles[$i]["comment"] = $_POST["comment_".$formattedFiles[$i]["name"]];
+    }else{
+        $formattedFiles[$i]["comment"] = "";
+    }
 }
 
 function setError($err){
@@ -38,7 +53,7 @@ function setError($err){
 $fileResponses = array();
 
 foreach($formattedFiles as $key => $value){
-    $uploadfileName = $uploaddir . basename($value['name']);
+    $uploadfileName = $uploaddir . basename($value['name']) . "." . $typeExtensionMapping[$value['type']];
 
     $err = $value["error"];
     if($err == UPLOAD_ERR_INI_SIZE || $err == UPLOAD_ERR_FORM_SIZE || $value["size"] > $allowedMaxFileSize) {
@@ -57,6 +72,7 @@ foreach($formattedFiles as $key => $value){
             $fileResponses[$key]["type"] = $value['type'];
             $fileResponses[$key]["size"] = $value['size'];
             $fileResponses[$key]["upload_location"] = $uploadfileName;
+            $fileResponses[$key]["comment"] = $value['comment'];
             continue;
         } 
     } 

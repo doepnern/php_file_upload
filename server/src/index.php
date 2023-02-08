@@ -21,12 +21,13 @@
     <div class="main">
       <div class="upload_container">
         <h1>File Uploader</h1>
-        <form enctype="multipart/form-data" action="handleUpload.php" method="POST">
+        <form id="multi_file_form" enctype="multipart/form-data" action="handleUpload.php" method="POST">
           <!-- MAX_FILE_SIZE must precede the file input field -->
           <div class="file_input_container">
             <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
             <label for="userfile_input">Dateien auswählen:</label> <input id="userfile_input" name="userfile[]" type="file" accept="image/bmp,image/jpeg,image/jpg, image/png,image/svg+xml,image/webp,application/pdf" multiple/>
           </div>
+          <div id="file_preview_container"></div>
           <input type="submit" value="Abschicken" />
         </form>
       </div>
